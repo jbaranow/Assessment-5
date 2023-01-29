@@ -26,7 +26,7 @@ module.exports = {
                 city_id serial primary key, 
                 name varchar,
                 rating integer,
-                country_id FROM countries
+                country_id varchar
             );
 
             insert into countries (name)
