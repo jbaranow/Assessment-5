@@ -26,7 +26,7 @@ module.exports = {
                 city_id serial primary key, 
                 name varchar,
                 rating integer,
-                country_id varchar
+                country_id integer
             );
 
             insert into countries (name)
@@ -244,12 +244,8 @@ module.exports = {
             country_id
         } = req.body
 
-        sequelize.query(`INSERT INTO cities (name, rating)
-        VALUES ('${name}', ${rating});
-        
-        INSERT INTO cities (country_id)
-        SELECT ${country_id}
-        FROM countries;`)
+        sequelize.query(`INSERT INTO cities (name, rating, country_id)
+        VALUES ('${name}', ${rating}, ${country_id});`)
             .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log('issue adding data', err))
     }
