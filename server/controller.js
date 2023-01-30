@@ -250,10 +250,16 @@ module.exports = {
             .catch(err => console.log('issue adding data', err))
     },
 
-    getCities: (req, res) =>{
-        sequelize.query(`SELECT * FROM
-        WHERE country_id = ${country_id};`)
+    getCities: (req, res) => {
+        sequelize.query(`SELECT city.city_id, city.name AS city, city.rating, country.country_id, country.name AS country
+        FROM cities AS city 
+          JOIN countries AS country 
+            ON city.country_id = country.country_id;`)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log('error getting cities', err))
+    },
+
+    deleteCity: (req, res) => {
+
     }
 }
