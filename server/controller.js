@@ -248,5 +248,12 @@ module.exports = {
         VALUES ('${name}', ${rating}, ${countryId});`)
             .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log('issue adding data', err))
+    },
+
+    getCities: (req, res) =>{
+        sequelize.query(`SELECT * FROM
+        WHERE country_id = ${country_id};`)
+        .then(dbRes => res.status(200).send(dbRes[0]))
+        .catch(err => console.log('error getting cities', err))
     }
 }
